@@ -14,7 +14,7 @@ function choose_word(){
 
     word_list = load_words()
     // secret_word = random.choice(word_list)
-    secret_word = list[Math.floor((Math.random()*word_list.length))];
+    var secret_word = word_list[Math.floor((Math.random()*word_list.length))];
     secret_word = secret_word.toLowerCase()
 
     return secret_word

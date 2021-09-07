@@ -1,6 +1,7 @@
 // import string
 // from words import choose_word
-choose_word = require(words.choose_word);
+const choose_word = require('./words');
+const readline = require('readline-sync');
 // from images import IMAGES
 
 //  End of helper code
@@ -90,7 +91,7 @@ function hangman(secret_word){
 
     */
       console.log("Welcome to the game, Hangman!");
-      console.log("I am thinking of a word that is " + str(len(secret_word)) + " letters long.");
+      console.log("I am thinking of a word that is " + secret_word.length + " letters long.");
       console.log("");
   
       letters_guessed = []
@@ -98,7 +99,7 @@ function hangman(secret_word){
       available_letters = get_available_letters(letters_guessed)
       console.log(`Available letters: ${available_letters}`);
   
-      guess = raw_input("Please guess a letter: ")
+      guess = readline.question("Please guess a letter: ")
       letter = guess.toLowerCase()
   
       if (secret_word.includes(letter)){
