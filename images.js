@@ -66,3 +66,5 @@ IMAGES = [`
 
 	
 `]
+
+module.exports = IMAGES ;
