@@ -54,8 +54,6 @@ function hangman(secret_word){
     console.log(`Available letters: ${available_letters}`);
 
     word_guessed = is_word_guessed(secret_word, letters_guessed);
-    console.log(word_guessed);
-    console.log(letters_guessed);
     if(word_guessed){
       console.log(" * * Congratulations, you won! * * ");
       console.log("");
@@ -64,12 +62,15 @@ function hangman(secret_word){
     guess = readline.question("Please guess a letter: ")
     letter = guess.toLowerCase()
     if(secret_word.includes(letter)){
-      letters_guessed.push(letter)
-      console.log(`Good guess: ${get_guessed_word(secret_word, letters_guessed)}`);
-      console.log("");
+      if(!letters_guessed.includes(letter)){
+        letters_guessed.push(letter);
+        console.log(`Good guess: ${get_guessed_word(secret_word, letters_guessed)}`);
+        console.log("");
+      }else{
+        console.log("Guessed one.");
+      }
     }else{
       console.log(`Oops! That letter is not in my word:  ${get_guessed_word(secret_word, letters_guessed)}`)
-      // letters_guessed.push(letter)
       console.log("");
     }
   }
