@@ -81,35 +81,44 @@ function game(secret_word, remaining_lives, images){
       console.log("");
       break;
     }
+
     console.log("");
     guess = readline.question("Please guess a letter: ")
     letter = guess.toLowerCase();
     valid = valid_input(letter);
+
     if(valid === 'hint'){
       h_letter = hint_letter(secret_word, letters_guessed);
       letters_guessed.push(letter);
       console.log("");
       console.log(`Here you go: ${get_guessed_word(secret_word, letters_guessed)}`);
       console.log("");
+
     }else if(valid && secret_word.includes(letter)){
+
       if(!letters_guessed.includes(letter)){
         letters_guessed.push(letter);
         console.log("");
         console.log(`Good guess: ${get_guessed_word(secret_word, letters_guessed)}`);
         console.log("");
+
       }else{
         console.log("");
         console.log("Guessed one.");
         console.log(images[images.length - remaining_lives]);
         remaining_lives--;
       }
+
     }else{
+
       if(valid_input(letter) === false){
         console.log("");
         console.log("Invalid Input");
         console.log(images[images.length - remaining_lives]);
         remaining_lives--;
+
       }else{
+
         console.log("");
         console.log(`Oops! That letter is not in my word:  ${get_guessed_word(secret_word, letters_guessed)}`)
         console.log("");
@@ -132,12 +141,15 @@ function hangman(secret_word, images){
     if(user.toLowerCase() === 'easy'){
       game(secret_word, 8, images);
       break;
+
     }else if(user.toLowerCase() === 'medium'){
       game(secret_word, 6, images);
       break;
+
     }else if(user.toLowerCase() === 'hard'){
       game(secret_word, 4, images);
       break;
+      
     }else{
       console.log("");
       console.log("Please tell in which level you want to play.");
