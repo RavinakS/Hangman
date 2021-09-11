@@ -48,12 +48,14 @@ function valid_input(user_input){
   user = parseInt(user_input);
   if(user === user){ // user will have NaN if the user_input not a number and NaN === NaN is false 
     return false;
+
   }else if(user_input.length === 1){
     return true;
+
   }else if(user_input === 'hint'){
     return 'hint'
-  }
-  else{
+
+  }else{
     return false;
   }
 }
@@ -107,6 +109,8 @@ function game(secret_word, remaining_lives, images){
         console.log("Guessed one.");
         console.log(images[images.length - remaining_lives]);
         remaining_lives--;
+        console.log(`You have ${remaining_lives} remaining lives now.`);
+        console.log("");
       }
 
     }else{
@@ -116,6 +120,8 @@ function game(secret_word, remaining_lives, images){
         console.log("Invalid Input");
         console.log(images[images.length - remaining_lives]);
         remaining_lives--;
+        console.log(`You have ${remaining_lives} remaining lives now.`);
+        console.log("");
 
       }else{
 
@@ -124,6 +130,8 @@ function game(secret_word, remaining_lives, images){
         console.log("");
         console.log(images[images.length - remaining_lives]);
         remaining_lives--;
+        console.log(`You have ${remaining_lives} remaining lives now.`);
+        console.log("");
       }
     }
   }
@@ -149,7 +157,7 @@ function hangman(secret_word, images){
     }else if(user.toLowerCase() === 'hard'){
       game(secret_word, 4, images);
       break;
-      
+
     }else{
       console.log("");
       console.log("Please tell in which level you want to play.");
