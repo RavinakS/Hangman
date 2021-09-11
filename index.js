@@ -1,5 +1,6 @@
 const choose_word = require('./words');
 const readline = require('readline-sync');
+const IMAGES = require('./images');
 
 function is_word_guessed(secret_word, letters_guessed){
    index = 0;
@@ -43,13 +44,14 @@ function get_available_letters(letters_guessed){
     return letters_left
 }
 
-function hangman(secret_word){
+function hangman(secret_word, images){
   console.log("Welcome to the game, Hangman!");
   console.log(`I am thinking of a word that is ${secret_word.length} letters long.`);
   console.log("");
   letters_guessed = []
 
-  while(true){
+  remaining_lives = 8;
+  while(remaining_lives>=1){
     available_letters = get_available_letters(letters_guessed)
     console.log(`Available letters: ${available_letters}`);
 
@@ -68,13 +70,24 @@ function hangman(secret_word){
         console.log("");
       }else{
         console.log("Guessed one.");
+        console.log(images[images.length - remaining_lives]);
+        remaining_lives--;
       }
     }else{
       console.log(`Oops! That letter is not in my word:  ${get_guessed_word(secret_word, letters_guessed)}`)
       console.log("");
+      console.log(images[images.length - remaining_lives]);
+      remaining_lives--;
     }
   }
 }
     
-secret_word = choose_word()
-hangman(secret_word)
+secret_word = choose_word();
+// hangman(secret_word, IMAGES)
+image = 0;
+while(image<IMAGES.length){
+  if(image>3){
+    console.log(IMAGES[image]);
+  }
+  image++;
+}
