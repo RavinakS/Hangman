@@ -44,6 +44,17 @@ function get_available_letters(letters_guessed){
     return letters_left
 }
 
+function valid_input(user_input){
+  user = parseInt(user_input);
+  if(user === user){ // user will have NaN if the user_input not a number and NaN === NaN is false 
+    return false;
+  }else if(user_input.length === 1){
+    return true;
+  }else{
+    return false;
+  }
+}
+
 function hangman(secret_word, images){
   console.log("Welcome to the game, Hangman!");
   console.log(`I am thinking of a word that is ${secret_word.length} letters long.`);
@@ -63,7 +74,7 @@ function hangman(secret_word, images){
     }
     guess = readline.question("Please guess a letter: ")
     letter = guess.toLowerCase()
-    if(secret_word.includes(letter)){
+    if(valid_input(letter) && secret_word.includes(letter)){
       if(!letters_guessed.includes(letter)){
         letters_guessed.push(letter);
         console.log(`Good guess: ${get_guessed_word(secret_word, letters_guessed)}`);
@@ -74,20 +85,19 @@ function hangman(secret_word, images){
         remaining_lives--;
       }
     }else{
-      console.log(`Oops! That letter is not in my word:  ${get_guessed_word(secret_word, letters_guessed)}`)
-      console.log("");
-      console.log(images[images.length - remaining_lives]);
-      remaining_lives--;
+      if(valid_input(letter) === false){
+        console.log("Invalid Input");
+        console.log(images[images.length - remaining_lives]);
+        remaining_lives--;
+      }else{
+        console.log(`Oops! That letter is not in my word:  ${get_guessed_word(secret_word, letters_guessed)}`)
+        console.log("");
+        console.log(images[images.length - remaining_lives]);
+        remaining_lives--;
+      }
     }
   }
 }
     
 secret_word = choose_word();
-// hangman(secret_word, IMAGES)
-image = 0;
-while(image<IMAGES.length){
-  if(image>3){
-    console.log(IMAGES[image]);
-  }
-  image++;
-}
+hangman(secret_word, IMAGES)
